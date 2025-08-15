@@ -1,0 +1,33 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.nav-link {
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffc107 !important;
+}
+
+.main-content {
+    height: 100vh;
+    overflow: auto;
+}
+
+.left-content {
+    height: 100vh;
+    overflow: auto;
+}
+
+@media (max-width: 768px) {
+    .left-content {
+        position: sticky;
+        border-radius: 10px 10px 0 0;
+        height: 25vh;
+        overflow: auto;
+        bottom: 0;
+        z-index: 1000;
+        background-color: green;
+    }
+}
