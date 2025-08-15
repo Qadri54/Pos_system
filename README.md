@@ -5,7 +5,7 @@
   <img src="https://img.shields.io/badge/PHP-8.2+-blue?style=for-the-badge&logo=php" alt="PHP">
   <img src="https://img.shields.io/badge/Bootstrap-5.3-purple?style=for-the-badge&logo=bootstrap" alt="Bootstrap">
   <img src="https://img.shields.io/badge/Livewire-3.x-green?style=for-the-badge&logo=livewire" alt="Livewire">
-  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite" alt="SQLite">
+  <img src="https://img.shields.io/badge/MYSQL-003B57?style=for-the-badge&logo=mysql" alt="MYSQL">
   <img src="https://img.shields.io/badge/DataTables-1.13-orange?style=for-the-badge" alt="DataTables">
 </p>
 
