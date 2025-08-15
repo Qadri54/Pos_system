@@ -16,8 +16,6 @@
 ### 📊 Dashboard Interaktif
 
 -   🏠 **Dashboard Modern** - Statistik real-time dengan card layout responsif
--   📈 **Analytics** - Grafik penjualan dan monitoring performa bisnis
--   🔔 **Notifikasi Real-time** - Alert untuk aktivitas penting sistem
 -   📱 **Fully Responsive** - Optimized untuk desktop, tablet, dan mobile
 
 ### 🛍️ Manajemen Produk Lengkap
@@ -52,10 +50,8 @@
 
 ### 📈 Reporting & History
 
--   📊 **Transaction History** - Complete audit trail
 -   📈 **Sales Reports** - Detail analytics dan insights
 -   💾 **Export Functions** - PDF dan Excel reports
--   🕐 **Activity Logs** - System activity monitoring
 
 ## 🛠️ Teknologi yang Digunakan
 
@@ -63,7 +59,7 @@
 
 -   **Laravel 11.x** - Modern PHP framework dengan Eloquent ORM
 -   **PHP 8.2+** - Latest PHP version dengan performance improvements
--   **SQLite Database** - Lightweight database untuk development
+-   **Mysql Database**
 -   **Laravel Breeze** - Simple authentication scaffolding
 
 ### Frontend & UI Framework
