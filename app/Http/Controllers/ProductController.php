@@ -48,7 +48,7 @@ class ProductController extends Controller {
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric|min:0',
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp,gif|max:3048',
             'outlet_id' => 'required|exists:outlets,id',
         ]);
 
