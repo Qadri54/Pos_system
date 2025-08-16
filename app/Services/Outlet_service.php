@@ -19,14 +19,15 @@ class Outlet_service {
         }
     }
 
-    public function store($data) {
+    public function store($data, $userId) {
         try {
             DB::beginTransaction();
             $outlet = Outlet::create([
                 "outlet_name" => $data['outlet_name'],
                 "address" => $data['address'],
             ]);
-            
+
+            $outlet->users()->attach($userId);
             DB::commit();
             return $outlet;
         } catch (\Throwable $e) {

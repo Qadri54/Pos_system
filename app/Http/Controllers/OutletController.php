@@ -35,8 +35,7 @@ class OutletController extends Controller {
         ]);
 
         $outlet = new Outlet_service();
-        $outlet->store($request->all());
-
+        $outlet->store($request->all(), auth()->user()->id);
         return redirect()->route('outlets.index')->with('success', 'Outlet berhasil dibuat!');
     }
 
