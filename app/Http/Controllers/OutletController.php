@@ -22,7 +22,7 @@ class OutletController extends Controller {
      */
     public function create() {
         $users = User::where("user_id", auth()->user()->id)->get();
-        return view('outlets.create', compact('users'));
+        return view('outlet.create', compact('users'));
     }
 
     /**
