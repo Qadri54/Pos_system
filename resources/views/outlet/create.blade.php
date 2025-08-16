@@ -89,28 +89,6 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="user_id" class="form-label fw-bold">
-                                <i class="bi bi-people me-1"></i>
-                                Pilih Staff untuk Outlet
-                            </label>
-                            <select class="form-select @error('user_id') is-invalid @enderror" id="user_id"
-                                name="user_id[]" multiple>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}" {{ in_array($user->id, old('user_id', [])) ? 'selected' : '' }}>
-                                        {{ $user->name }} ({{ $user->email }})
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('user_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <div class="form-text">
-                                <i class="bi bi-info-circle me-1"></i>
-                                Pilih staff yang akan ditempatkan di outlet ini. Anda dapat memilih lebih dari satu.
-                            </div>
-                        </div>
-
-                        <div class="col-12">
                             <div class="alert alert-info border-0" role="alert">
                                 <i class="bi bi-lightbulb me-2"></i>
                                 <strong>Tips:</strong> Pastikan nama outlet mudah diingat dan alamat lengkap untuk
