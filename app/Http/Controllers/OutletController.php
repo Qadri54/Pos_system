@@ -22,7 +22,7 @@ class OutletController extends Controller {
      */
     public function create() {
         $users = User::where("user_id", auth()->user()->id)->get();
-        return view('outlet.create', compact('users'));
+        return view('outlets.create', compact('users'));
     }
 
     /**
@@ -32,14 +32,12 @@ class OutletController extends Controller {
         $request->validate([
             "outlet_name" => "required|string|max:255",
             "address" => "required|string|max:500",
-            "user_id" => "nullable|array",
-            "user_id.*" => "exists:users,id"
         ]);
 
         $outlet = new Outlet_service();
         $outlet->store($request->all());
 
-        return redirect()->route('outlet.index')->with('success', 'Outlet berhasil dibuat!');
+        return redirect()->route('outlets.index')->with('success', 'Outlet berhasil dibuat!');
     }
 
     /**
@@ -81,7 +79,7 @@ class OutletController extends Controller {
             $outlet->users()->detach();
         }
 
-        return redirect()->route('outlet.index')->with('success', 'Outlet berhasil diperbarui!');
+        return redirect()->route('outlets.index')->with('success', 'Outlet berhasil diperbarui!');
     }
 
     /**
@@ -95,9 +93,9 @@ class OutletController extends Controller {
             // Delete the outlet
             $outlet->delete();
 
-            return redirect()->route('outlet.index')->with('success', 'Outlet berhasil dihapus!');
+            return redirect()->route('outlets.index')->with('success', 'Outlet berhasil dihapus!');
         } catch (\Exception $e) {
-            return redirect()->route('outlet.index')->with('error', 'Gagal menghapus outlet. Pastikan tidak ada data yang terkait.');
+            return redirect()->route('outlets.index')->with('error', 'Gagal menghapus outlet. Pastikan tidak ada data yang terkait.');
         }
     }
 }

@@ -26,9 +26,7 @@ class Outlet_service {
                 "outlet_name" => $data['outlet_name'],
                 "address" => $data['address'],
             ]);
-
-            $outlet->users()->attach($data['user_id']);
-
+            
             DB::commit();
             return $outlet;
         } catch (\Throwable $e) {
