@@ -88,7 +88,7 @@ Route::middleware('auth')->group(function () {
         Route::get('ongoing', [OrderController::class, 'ongoing'])->name('ongoing');
         Route::get('completed', [OrderController::class, 'completed'])->name('completed');
         Route::get('canceled', [OrderController::class, 'canceled'])->name('canceled');
-        Route::post('invoice', [OrderController::class, 'invoice'])->name('invoice');
+        Route::get('invoice/{orderId}', [OrderController::class, 'invoice'])->name('invoice');
     });
 
 });

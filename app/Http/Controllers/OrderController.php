@@ -32,23 +32,37 @@ class OrderController extends Controller {
     }
 
 
-    public function invoice(Request $request) {
-        $data = json_decode($request->data, true);
-        $total_price = $request["total_price"];
-        $date = now()->format('d-m-Y');
-        if($request["selected_outlet"]) {
-            $selected_outlet = Outlet::find($request["selected_outlet"])->outlet_name;
-            $address = Outlet::find($request["selected_outlet"])->address;
+    public function invoice($orderId) {
+        $order = Order::with(['products', 'outlet'])->findOrFail($orderId);
+
+        $data = $order->products->map(function ($product) {
+            return [
+                'name' => $product->product_name,
+                'price' => $product->price,
+                'quantity' => $product->pivot->quantity,
+                'subtotal' => $product->pivot->sub_total
+            ];
+        })->toArray();
+
+        $total_price = $order->total_price;
+        $date = $order->created_at->format('d-m-Y');
+        $customer_name = $order->customer_name;
+        $payment_method = ucfirst($order->payment_method);
+
+        if ($order->outlet) {
+            $selected_outlet = $order->outlet->outlet_name;
+            $address = $order->outlet->address;
         } else {
-            $selected_outlet = 'N/A';
+            $selected_outlet = 'Takeaway';
             $address = 'N/A';
         }
-        $html = view('invoice', compact('data', 'total_price', 'selected_outlet', 'address', 'date'))->render();
+
+        $html = view('invoice', compact('data', 'total_price', 'selected_outlet', 'address', 'date', 'customer_name', 'payment_method', 'order'))->render();
 
         $mpdf = new \Mpdf\Mpdf();
         $mpdf->WriteHTML($html);
 
-        $mpdf->Output('invoice.pdf', \Mpdf\Output\Destination::DOWNLOAD);
+        $mpdf->Output('invoice-' . $order->id . '.pdf', \Mpdf\Output\Destination::DOWNLOAD);
     }
 
     /**

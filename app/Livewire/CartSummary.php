@@ -67,9 +67,8 @@ class CartSummary extends Component {
 
     public function checkout() {
         $this->validate();
-        // Implement checkout logic here
-        DB::beginTransaction();
 
+        DB::beginTransaction();
         try {
             $order = Order::create([
                 'outlet_id' => $this->selected_outlet,
@@ -80,18 +79,21 @@ class CartSummary extends Component {
             ]);
 
             foreach ($this->data as $item) {
-                $order->products()->attach($item['id'], ['quantity' => $item['quantity'], 'sub_total' => $item['subtotal']]);
+                $order->products()->attach($item['id'], [
+                    'quantity' => $item['quantity'],
+                    'sub_total' => $item['subtotal']
+                ]);
             }
 
             DB::commit();
+
+            session()->flash('success', 'Order berhasil dibuat.');
+
+            $this->dispatch('redirect-to-invoice' , ['order_id' => $order->id]);
         } catch (\Exception $e) {
             DB::rollback();
-
-            throw $e;
+            session()->flash('error', 'Gagal membuat order: ' . $e->getMessage());
         }
-
-        // For example, redirect to a checkout page or process the order
-        return redirect()->route('orders.index')->with('success', 'Berhasil membuat order atas nama ' . $this->customer_name);
     }
 
     public function render() {
