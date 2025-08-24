@@ -338,7 +338,7 @@
                                 style="width: 80px; height: 80px;">
                                 <i class="bi bi-check-circle fs-1 text-primary"></i>
                             </div>
-                            <h2 class="fw-bold text-primary">{{ $totalOrders ?? 0 }}</h2>
+                            <h2 class="fw-bold text-primary">{{ $todayOrders ?? 0 }}</h2>
                             <p class="text-muted mb-3">Orders Selesai Hari Ini</p>
                             <div class="progress mb-3" style="height: 10px;">
                                 <div class="progress-bar bg-primary" style="width: 75%;"></div>
