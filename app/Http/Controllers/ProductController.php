@@ -14,7 +14,11 @@ class ProductController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $products = Product::with('category', 'outlet')->get();
+        $products = Product::whereHas('outlet', function ($query) {
+            $query->whereHas('users', function ($query) {
+                $query->where('user_outlet.user_id', auth()->user()->id);
+            });
+        })->get();
         return view('products.index', compact('products'));
     }
 
