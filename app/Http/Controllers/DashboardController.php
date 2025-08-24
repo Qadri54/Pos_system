@@ -13,9 +13,6 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller {
     public function index() {
-        // Total Orders
-        $totalOrders = Order::count();
-
         // Total Employees (Users)
         $totalEmployees = User::where('user_id', auth()->user()->id)->count();
 
@@ -46,16 +43,25 @@ class DashboardController extends Controller {
                 $query->where('user_outlet.user_id', auth()->user()->id);
             });
         })->where('status', 'on process')->count();
+
         $completedOrders = Order::whereHas('outlet', function ($query) {
             $query->whereHas('users', function ($query) {
                 $query->where('user_outlet.user_id', auth()->user()->id);
             });
         })->where('status', 'done')->count();
+
         $canceledOrders = Order::whereHas('outlet', function ($query) {
             $query->whereHas('users', function ($query) {
                 $query->where('user_outlet.user_id', auth()->user()->id);
             });
         })->where('status', 'canceled')->count();
+
+        // Total Orders
+        $totalOrders = Order::whereHas('outlet', function ($query) {
+            $query->whereHas('users', function ($query) {
+                $query->where('user_outlet.user_id', auth()->user()->id);
+            });
+        })->count();
 
         // Today's Orders
         $todayOrders = Order::whereHas('outlet', function ($query) {
