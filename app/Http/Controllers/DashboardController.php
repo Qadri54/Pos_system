@@ -20,7 +20,11 @@ class DashboardController extends Controller {
         $totalEmployees = User::where('user_id', auth()->user()->id)->count();
 
         // Total Revenue (from completed orders)
-        $totalRevenue = Order::where('status', 'done')->sum('total_price') ?? 0;
+        $totalRevenue = Order::whereHas('outlet', function ($query) {
+            $query->whereHas('users', function ($query) {
+                $query->where('user_outlet.user_id', auth()->user()->id);
+            });
+        })->where('status', 'done')->sum('total_price') ?? 0;
 
         // Total Products
         $totalProducts = Product::with('outlet')
@@ -29,18 +33,36 @@ class DashboardController extends Controller {
                     $query->where('user_outlet.user_id', auth()->user()->id);
                 });
             })
-            ->count();
+            ->count() ?? 0;
 
         // Total Outlets
-        $totalOutlets = Outlet::count();
+        $totalOutlets = Outlet::whereHas('users', function ($query) {
+            $query->where('user_outlet.user_id', auth()->user()->id);
+        })->count() ?? 0;
 
         // Orders by Status
-        $ongoingOrders = Order::where('status', 'on process')->count();
-        $completedOrders = Order::where('status', 'done')->count();
-        $canceledOrders = Order::where('status', 'canceled')->count();
+        $ongoingOrders = Order::whereHas('outlet', function ($query) {
+            $query->whereHas('users', function ($query) {
+                $query->where('user_outlet.user_id', auth()->user()->id);
+            });
+        })->where('status', 'on process')->count();
+        $completedOrders = Order::whereHas('outlet', function ($query) {
+            $query->whereHas('users', function ($query) {
+                $query->where('user_outlet.user_id', auth()->user()->id);
+            });
+        })->where('status', 'done')->count();
+        $canceledOrders = Order::whereHas('outlet', function ($query) {
+            $query->whereHas('users', function ($query) {
+                $query->where('user_outlet.user_id', auth()->user()->id);
+            });
+        })->where('status', 'canceled')->count();
 
         // Today's Orders
-        $todayOrders = Order::whereDate('created_at', Carbon::today())->count();
+        $todayOrders = Order::whereHas('outlet', function ($query) {
+            $query->whereHas('users', function ($query) {
+                $query->where('user_outlet.user_id', auth()->user()->id);
+            });
+        })->whereDate('created_at', Carbon::today())->count();
 
         return view('dashboard', compact(
             'totalOrders',
