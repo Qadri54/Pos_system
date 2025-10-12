@@ -386,51 +386,6 @@
                             </ul>
                         </li>
 
-                        <!-- Notifications -->
-                        <li class="nav-item dropdown me-3">
-                            <a class="nav-link position-relative px-3 py-2" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-bell-fill fs-5"></i>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                    style="font-size: 0.6rem;">
-                                    3
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end mt-2" style="width: 320px;">
-                                <li class="px-3 py-2">
-                                    <h6 class="dropdown-header text-primary mb-2">
-                                        <i class="bi bi-bell me-2"></i>
-                                        Notifikasi Terbaru
-                                    </h6>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item rounded-3 mx-2 mb-2" href="#">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0">
-                                                <div class="bg-primary rounded-circle p-2 me-3">
-                                                    <i class="bi bi-cart text-white"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1">Order Baru</h6>
-                                                <p class="mb-1 small text-muted">Order #12345 telah dibuat</p>
-                                                <small class="text-muted">2 menit lalu</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider mx-2">
-                                </li>
-                                <li>
-                                    <a class="dropdown-item text-center rounded-3 mx-2 text-primary" href="#">
-                                        Lihat Semua Notifikasi
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <!-- User Profile Dropdown -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center px-3 py-2" href="#"
@@ -508,8 +463,6 @@
                                         <li class="breadcrumb-item active">Manajemen User</li>
                                     @elseif(request()->routeIs('outlets.*'))
                                         <li class="breadcrumb-item active">Outlet</li>
-                                    @elseif(request()->routeIs('histories.*'))
-                                        <li class="breadcrumb-item active">Riwayat</li>
                                     @endif
                                 </ol>
                             </nav>
