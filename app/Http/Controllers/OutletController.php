@@ -13,11 +13,10 @@ class OutletController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $outlets = Outlet::select("id", "outlet_name")
-            ->whereHas("users", function ($query) {
-                $query->where("user_outlet.user_id", auth()->user()->id);
-            })->get();
-            
+        $outlets = Outlet::whereHas("users", function ($query) {
+            $query->where("user_outlet.user_id", auth()->user()->id);
+        })->get();
+
         return view('outlet.index', compact('outlets'));
     }
 
